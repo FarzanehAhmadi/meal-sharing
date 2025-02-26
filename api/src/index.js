@@ -19,7 +19,7 @@ apiRouter.get("/future-meals", async (req, res) => {
     if (futureMeals.length === 0) {
     return res.status(404).send("There are no meals for the future.");
     }
-    res.send(futureMeals);
+    res.json(futureMeals);
   } catch (error) {
     console.error(error)
     res.status(500).send('Server error!')
@@ -33,7 +33,7 @@ apiRouter.get("/past-meals", async (req, res) => {
   if(pastMeals.length === 0) {
     return res.status(404).send("There are no meals in the past.")
   }
-  res.send(pastMeals);
+  res.json(pastMeals);
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error')
@@ -47,7 +47,7 @@ apiRouter.get("/all-meals" , async (req, res) =>{
     if(allMeals.length === 0) {
       return res.status(404).send('There are no meals!')
     }
-    res.send(allMeals);
+    res.json(allMeals);
 
   } catch (error) {
     console.log(error)
@@ -66,7 +66,7 @@ apiRouter.get("/first-meal", async (req, res)=>{
     if(!firstMeal){
       return res.status(404).send("No meals found!")
     }
-    res.send(firstMeal)
+    res.json(firstMeal)
   } catch (error) {
     console.error(error);
     res.status(500).send('server error')
@@ -84,7 +84,7 @@ apiRouter.get("/last-meal", async (req, res)=>{
     if(!lastMeal){
       return res.status(404).send("No meals found!")
     }
-    res.send(lastMeal)
+    res.json(lastMeal)
   } catch (error) {
     console.error(error);
     res.status(500).send('server error')
