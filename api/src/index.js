@@ -14,80 +14,70 @@ const apiRouter = express.Router();
 //future-meals
 apiRouter.get("/future-meals", async (req, res) => {
   try {
-    const meals = await knex.raw("Select * From Meal")
-    const futureMeals = meals[0].filter( meal => new Date (meal.when) > new Date ())
-    if (futureMeals.length === 0) {
-    return res.status(404).send("There are no meals for the future.");
+    const futureMeals = await knex.raw("Select * From Meal WHERE Meal.when > NOW()")
+    if (futureMeals[0].length === 0) {
+    return res.status(404).json("There are no meals for the future.");
     }
-    res.json(futureMeals);
+    res.json(futureMeals[0]);
   } catch (error) {
     console.error(error)
-    res.status(500).send('Server error!')
+    res.status(500).json('Server error!')
   }
 })
 //past-meals
 apiRouter.get("/past-meals", async (req, res) => {
   try {
-    const meals = await knex.raw("Select * From Meal") 
-    const pastMeals = meals[0].filter( meal => new Date (meal.when) < new Date ())
-  if(pastMeals.length === 0) {
-    return res.status(404).send("There are no meals in the past.")
+    const pastMeals = await knex.raw("Select * From Meal WHERE Meal.when < NOW()") 
+  if(pastMeals[0].length === 0) {
+    return res.status(404).json("There are no meals in the past.")
   }
-  res.json(pastMeals);
+  res.json(pastMeals[0]);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Server error')
+    res.status(500).json('Server error')
   }
 })
 //all-meals
 apiRouter.get("/all-meals" , async (req, res) =>{
   try {
-    const meals = await knex.raw("SELECT * FROM Meal");
-    const allMeals = meals[0].sort((a , b) => a.id - b.id);
-    if(allMeals.length === 0) {
-      return res.status(404).send('There are no meals!')
+    const meals = await knex.raw("SELECT * FROM Meal ORDER BY id DESC");
+    if(meals[0].length === 0) {
+      return res.status(404).json('There are no meals!')
     }
-    res.json(allMeals);
+    res.json(meals[0]);
 
   } catch (error) {
     console.log(error)
-    res.status(500).send('Server error')
+    res.status(500).json('Server error')
   }
  
 })
 //first-meal
 apiRouter.get("/first-meal", async (req, res)=>{
   try {
-    const meals = await knex.raw("SELECT * FROM Meal")
-    const ids = meals[0].map((meal => meal.id));
-    const minId = Math.min(...ids);
-    const firstMeal = meals[0].find((meal)=> meal.id === minId)
-
-    if(!firstMeal){
-      return res.status(404).send("No meals found!")
+    const firstMeal = await knex.raw("SELECT * FROM Meal ORDER BY id ASC LIMIT 1");
+    if(firstMeal[0].length===0){
+      return res.status(404).json("No meals found!")
     }
-    res.json(firstMeal)
+    res.json(firstMeal[0][0])
   } catch (error) {
     console.error(error);
-    res.status(500).send('server error')
+    res.status(500).json('server error')
   }
   
 })
 //last-meal
 apiRouter.get("/last-meal", async (req, res)=>{
   try {
-    const meals = await knex.raw("SELECT * FROM Meal")
-    const ids = meals[0].map((meal => meal.id));
-    const maxId = Math.max(...ids);
-    const lastMeal = meals[0].find((meal)=> meal.id === maxId)
-
-    if(!lastMeal){
-      return res.status(404).send("No meals found!")
+    const lastMeal = await knex.raw("SELECT * FROM Meal ORDER BY id DESC LIMIT 1")
+  
+    if(lastMeal[0].length === 0){
+      return res.status(404).json("No meals found!")
     }
-    res.json(lastMeal)
+    res.json(lastMeal[0][0])
   } catch (error) {
     console.error(error);
-    res.status(500).send('server error')
+    res.status(500).json('server error')
   }
   
 })
