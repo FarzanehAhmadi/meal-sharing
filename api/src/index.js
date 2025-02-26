@@ -82,9 +82,9 @@ apiRouter.get("/last-meal", async (req, res)=>{
   
 })
 
-//Server
-app.listen(3000, ()=>
-  console.log("I am running..."))
+// //Server
+// app.listen(3000, ()=>
+//   console.log("I am running..."))
 
 // // You can delete this route once you add your own routes
 // apiRouter.get("/", async (req, res) => {
@@ -96,12 +96,12 @@ app.listen(3000, ()=>
 //   res.json({ tables });
 // });
 
-// // This nested router example can also be replaced with your own sub-router
-// apiRouter.use("/nested", nestedRouter);
+// This nested router example can also be replaced with your own sub-router
+apiRouter.use("/nested", nestedRouter);
 
  app.use("/api", apiRouter);
 
-// app.listen(process.env.PORT, () => {
-//   console.log(`API listening on port ${process.env.PORT}`);
-// });
+app.listen(process.env.PORT, () => {
+  console.log(`API listening on port ${process.env.PORT}`);
+});
 
