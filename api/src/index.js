@@ -55,11 +55,13 @@ apiRouter.get("/all-meals" , async (req, res) =>{
 //first-meal
 apiRouter.get("/first-meal", async (req, res)=>{
   try {
-    const firstMeal = await knex.raw("SELECT * FROM Meal ORDER BY id ASC LIMIT 1");
-    if(firstMeal[0].length===0){
+    const result = await knex.raw("SELECT * FROM Meal ORDER BY id ASC LIMIT 1");
+    const meals = result[0];
+    const firstMeal = meals[0];
+    if(!firstMeal){
       return res.status(404).json("No meals found!")
     }
-    res.json(firstMeal[0][0])
+    res.json(firstMeal)
   } catch (error) {
     console.error(error);
     res.status(500).json('server error')
@@ -69,22 +71,21 @@ apiRouter.get("/first-meal", async (req, res)=>{
 //last-meal
 apiRouter.get("/last-meal", async (req, res)=>{
   try {
-    const lastMeal = await knex.raw("SELECT * FROM Meal ORDER BY id DESC LIMIT 1")
+    const result = await knex.raw("SELECT * FROM Meal ORDER BY id DESC LIMIT 1");
+    const meals = result[0];
+    const lastMeal = meals[0]
   
-    if(lastMeal[0].length === 0){
+    if(!lastMeal){
       return res.status(404).json("No meals found!")
-    }
-    res.json(lastMeal[0][0])
+    };
+
+    res.json(lastMeal)
   } catch (error) {
     console.error(error);
     res.status(500).json('server error')
   }
   
-})
-
-// //Server
-// app.listen(3000, ()=>
-//   console.log("I am running..."))
+});
 
 // // You can delete this route once you add your own routes
 // apiRouter.get("/", async (req, res) => {
