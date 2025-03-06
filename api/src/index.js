@@ -16,7 +16,7 @@ apiRouter.get("/future-meals", async (req, res) => {
   try {
     const futureMeals = await knex.raw("Select * From Meal WHERE Meal.when > NOW()")
     if (futureMeals[0].length === 0) {
-    return res.status(404).json("There are no meals for the future.");
+    return res.json([]);
     }
     res.json(futureMeals[0]);
   } catch (error) {
@@ -29,7 +29,7 @@ apiRouter.get("/past-meals", async (req, res) => {
   try {
     const pastMeals = await knex.raw("Select * From Meal WHERE Meal.when < NOW()") 
   if(pastMeals[0].length === 0) {
-    return res.status(404).json("There are no meals in the past.")
+    return res.json([]);
   }
   res.json(pastMeals[0]);
   } catch (error) {
