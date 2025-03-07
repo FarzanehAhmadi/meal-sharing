@@ -20,14 +20,14 @@ reservationRouter.get("/", async (req, res) => {
 // Add a new reservation
 reservationRouter.post("/", async (req, res) => {
   try {
-    const { meal, number_of_guests, created_date, contact_phonenumber, contact_name, contact_email } = req.body;
+    const { meal_id, number_of_guests, created_date, contact_phonenumber, contact_name, contact_email } = req.body;
 
-    if (!meal || !number_of_guests || !created_date || !contact_phonenumber || !contact_name || !contact_email) {
+    if (!meal_id || !number_of_guests || !created_date || !contact_phonenumber || !contact_name || !contact_email) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
     const [newReservation] = await knex("Reservation")
-      .insert({ meal, number_of_guests, created_date, contact_phonenumber, contact_name, contact_email })
+      .insert({ meal_id, number_of_guests, created_date, contact_phonenumber, contact_name, contact_email })
       .returning("*");
 
     res.status(201).json({ message: "New reservation added", reservation: newReservation });
@@ -55,16 +55,16 @@ reservationRouter.get("/:id", async (req, res) => {
 // Update a reservation by id
 reservationRouter.put("/:id", async (req, res) => {
   const { id } = req.params;
-  const { meal, number_of_guests, created_date, contact_phonenumber, contact_name, contact_email } = req.body;
+  const { meal_id, number_of_guests, created_date, contact_phonenumber, contact_name, contact_email } = req.body;
 
-  if (!meal || !number_of_guests || !created_date || !contact_phonenumber || !contact_name || !contact_email) {
+  if (!meal_id || !number_of_guests || !created_date || !contact_phonenumber || !contact_name || !contact_email) {
     return res.status(400).json({ error: "Missing required fields" });
   }
 
   try {
     const updatedReservation = await knex("Reservation")
       .where({ id })
-      .update({ meal, number_of_guests, created_date, contact_phonenumber, contact_name, contact_email });
+      .update({ meal_id, number_of_guests, created_date, contact_phonenumber, contact_name, contact_email });
 
     if (updatedReservation === 0) return res.status(404).json({ error: "Reservation not found" });
 
