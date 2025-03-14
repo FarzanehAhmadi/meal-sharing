@@ -5,8 +5,29 @@ const mealsRouter = express.Router();
 
 // Get all meals
 mealsRouter.get("/", async (req, res) => {
+  let query = knex.select("*").from("Meal");
+  // maxPrice
+  if (req.query.maxPrice){
+    query = query.where("price", "<=" , Number(req.query.maxPrice))
+  }
+  //title
+  if (req.query.title){
+    query = query.where("title", "like", `%${req.query.title}%`)
+  }
+  //dateAfter
+  if(req.query.dateAfter){
+    query = query.where("when", ">", new Date(req.query.dateAfter))
+  }
+  //dateBefore
+  if(req.query.dateBefore){
+    query = query.where("when", "<", new Date(req.query.dateBefore));
+  }
+  //limit
+  if(req.query.limit){
+    query = query.limit(Number(req.query.limit));
+  }
   try {
-    const meals = await knex.select("*").from("Meal");
+    const meals = await query;
     if (meals.length === 0) {
       return res.status(404).json({ error: 'There are no meals!' });
     }
