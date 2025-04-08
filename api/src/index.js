@@ -4,7 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import nestedRouter from "./routers/nested.js";
 import mealsRouter from "./routers/meals.js";
-import reservationsRouter from "./routers/reservations.js";
+import reservationsRouter from "./routers/reservation.js";
 import reviewsRouter from "./routers/reviews.js";
 
 const app = express();
