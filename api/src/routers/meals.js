@@ -5,8 +5,29 @@ const mealsRouter = express.Router();
 
 // Get all meals
 mealsRouter.get("/", async (req, res) => {
+  let query = knex.select("*").from("Meal");
+  // maxPrice
+  if (req.query.maxPrice) {
+    query = query.where("price", "<=", Number(req.query.maxPrice));
+  }
+  //title
+  if (req.query.title) {
+    query = query.where("title", "like", `%${req.query.title}%`);
+  }
+  //dateAfter
+  if (req.query.dateAfter) {
+    query = query.where("when", ">", new Date(req.query.dateAfter));
+  }
+  //dateBefore
+  if (req.query.dateBefore) {
+    query = query.where("when", "<", new Date(req.query.dateBefore));
+  }
+  //limit
+  if (req.query.limit) {
+    query = query.limit(Number(req.query.limit));
+  }
   try {
-    const meals = await knex.select("*").from("Meal");
+    const meals = await query;
     if (meals.length === 0) {
       return res.status(404).json({ error: "There are no meals!" });
     }
@@ -20,23 +41,44 @@ mealsRouter.get("/", async (req, res) => {
 // Add a new meal to the database
 mealsRouter.post("/", async (req, res) => {
   try {
-    const { title, description, location, when, max_reservations, price } =
-      req.body;
-    if (
-      !title ||
-      !description ||
-      !location ||
-      !when ||
-      max_reservations == null ||
-      typeof price !== "number" ||
-      price < 0
-    ) {
-      return res
-        .status(400)
-        .json({ error: "Missing or invalid required fields" });
+    const {
+      title,
+      description,
+      location,
+      when,
+      max_reservations,
+      price,
+      created_date,
+    } = req.body;
+
+    // Create an array to collect missing or invalid fields
+    const missingFields = [];
+
+    if (!title) missingFields.push("title");
+    if (!description) missingFields.push("description");
+    if (!location) missingFields.push("location");
+    if (!when) missingFields.push("when");
+    if (max_reservations == null) missingFields.push("max_reservations");
+    if (typeof price !== "number" || price < 0) missingFields.push("price");
+
+    if (missingFields.length > 0) {
+      return res.status(400).json({
+        error: "Missing or invalid required fields",
+        missingFields: missingFields,
+      });
     }
 
-    const [newMeal] = await knex("Meal").insert(req.body).returning("*");
+    const [newMeal] = await knex("Meal")
+      .insert({
+        title,
+        description,
+        location,
+        when,
+        max_reservations,
+        price,
+        created_date,
+      })
+      .returning("*");
     res.status(201).json({ message: "New meal added", meal: newMeal });
   } catch (error) {
     console.error(error);
