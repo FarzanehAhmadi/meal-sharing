@@ -1,4 +1,5 @@
 import React from "react";
+import "./mealStyles.css";
 
 const Meal = ({ meal }) => {
   return (
