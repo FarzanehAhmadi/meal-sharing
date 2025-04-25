@@ -19,9 +19,11 @@ const MealsList = () => {
   return (
     <div className="meals-list">
       <h2>Meals List</h2>
-      {meals.map((meal) => {
-        return <Meal key={meal.id} meal={meal} />;
-      })}
+      <div className="meals-grid">
+        {meals.map((meal) => {
+          return <Meal key={meal.id} meal={meal} />;
+        })}
+      </div>
     </div>
   );
 };

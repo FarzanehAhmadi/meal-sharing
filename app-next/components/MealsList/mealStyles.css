@@ -1,12 +1,18 @@
 .meals-list {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   margin: 20px;
   padding: 10px;
   background-color: #f9f9f9;
+  text-align: center;
 }
-
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal-width columns */
+  gap: 20px; /* Space between grid items */
+}
 .meal-card {
   display: flex;
   flex-direction: column;
