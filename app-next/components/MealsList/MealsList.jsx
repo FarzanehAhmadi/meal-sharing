@@ -1,0 +1,31 @@
+"use client";
+import { useEffect, useState } from "react";
+import Meal from "./Meal";
+import "./mealStyles.css";
+
+const MealsList = () => {
+  const [meals, setMeals] = useState([]);
+
+  useEffect(() => {
+    const fetchMeals = async () => {
+      const response = await fetch("http://localhost:3001/api/meals");
+      const data = await response.json();
+      setMeals(data);
+    };
+
+    fetchMeals();
+  }, []);
+
+  return (
+    <div className="meals-list">
+      <h2>Meals List</h2>
+      <div className="meals-grid">
+        {meals.map((meal) => {
+          return <Meal key={meal.id} meal={meal} />;
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default MealsList;
