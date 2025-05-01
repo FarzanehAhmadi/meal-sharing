@@ -4,10 +4,19 @@ import knex from "../database_client.js";
 
 const reviewsRouter = express.Router();
 
-// GET all reviews
+// ✅ GET all reviews or filter by meal_id
 reviewsRouter.get("/", async (req, res) => {
+  const { meal_id } = req.query;
+
   try {
-    const reviews = await knex("Review").select("*");
+    let query = knex("Review").select("*");
+
+    // Filter if meal_id is provided
+    if (meal_id) {
+      query = query.where("meal_id", parseInt(meal_id));
+    }
+
+    const reviews = await query;
     res.json(reviews);
   } catch (error) {
     console.error("Error fetching reviews:", error);
@@ -15,7 +24,7 @@ reviewsRouter.get("/", async (req, res) => {
   }
 });
 
-// POST a new review
+// ✅ POST a new review
 reviewsRouter.post("/", async (req, res) => {
   try {
     const { stars, meal_id, created_date, title, description } = req.body;
@@ -41,14 +50,14 @@ reviewsRouter.post("/", async (req, res) => {
   }
 });
 
-// GET a review by ID
+// ✅ GET a review by ID
 reviewsRouter.get("/:id", async (req, res) => {
   const reviewId = req.params.id;
   try {
     const review = await knex("Review")
       .select("*")
       .where("id", reviewId)
-      .first(); // Using .first() to get the review
+      .first();
 
     if (!review) {
       return res
@@ -63,35 +72,43 @@ reviewsRouter.get("/:id", async (req, res) => {
   }
 });
 
-// PUT update a review by ID
+// ✅ PUT update a review by ID
 reviewsRouter.put("/:id", async (req, res) => {
   const reviewId = req.params.id;
   const updatedReview = req.body;
   try {
-    if (reviewId) {
-      await knex("Review").update(updatedReview).where("id", reviewId);
-      return res.status(200).json({ message: "Review updated successfully" });
+    const updated = await knex("Review")
+      .where("id", reviewId)
+      .update(updatedReview);
+
+    if (updated === 0) {
+      return res
+        .status(404)
+        .json({ error: `Review not found with id: ${reviewId}` });
     }
-    res.status(404).json({ error: `Review not found with id: ${reviewId}` });
+
+    res.status(200).json({ message: "Review updated successfully" });
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({ error: error.message });
   }
 });
 
-// DELETE a review by ID
+// ✅ DELETE a review by ID
 reviewsRouter.delete("/:id", async (req, res) => {
   const reviewId = req.params.id;
   try {
-    const review = await knex("Review").where("id", reviewId);
-    if (review.length === 0) {
-      res.status(404).json({ error: `Review not found with id: ${reviewId}` });
-      return;
+    const deleted = await knex("Review").where("id", reviewId).del();
+
+    if (deleted === 0) {
+      return res
+        .status(404)
+        .json({ error: `Review not found with id: ${reviewId}` });
     }
-    await knex("Review").where("id", reviewId).del();
-    res.status(200).json({
-      message: `Review id ${reviewId} deleted successfully`,
-    });
+
+    res
+      .status(200)
+      .json({ message: `Review id ${reviewId} deleted successfully` });
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({ error: error.message });
