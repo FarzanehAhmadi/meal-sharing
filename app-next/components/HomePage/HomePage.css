@@ -1,9 +1,67 @@
-.link {
+/* HomePage.css */
+
+.hero {
+  background-image: url("https://img.freepik.com/free-photo/grilled-chicken-with-avocado-rice-black-plate_9975-124720.jpg?t=st=1746109939~exp=1746113539~hmac=d7163d7d9e1c9bf33a4c66151093b9e6509c489c9db1e73871bb4f71b753661b&w=1380");
+  background-size: cover;
+  background-position: center;
+  height: 400px;
   display: flex;
-  margin: 5vh 0;
+  justify-content: flex-start;
+  align-items: flex-end;
+  color: white;
+  text-align: left;
+  position: relative;
+  padding-left: 20px;
+  padding-bottom: 20px;
 }
 
-.logo,
-.message {
-  margin: auto;
+.hero-content {
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.hero p {
+  font-size: 1.5rem;
+}
+
+.meals-list {
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.meals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.meal-item {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.view-all-btn-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.view-all-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.view-all-btn:hover {
+  background-color: #45a049;
 }
