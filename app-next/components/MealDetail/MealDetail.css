@@ -1,0 +1,90 @@
+.meal-hero {
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  color: white;
+  text-align: left;
+  position: relative;
+}
+
+.meal-hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(60%);
+}
+
+.meal-hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+  max-width: 80%;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.meal-hero-text p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+form input,
+form textarea {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+form button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+ul li {
+  margin-bottom: 1rem;
+}
+.review-section,
+.reservation-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers children horizontally */
+  justify-content: center;
+  text-align: center;
+  max-width: 80%;
+  margin: 2rem auto 3rem auto;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.review-section form,
+.reservation-section form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
