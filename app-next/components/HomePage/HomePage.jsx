@@ -8,7 +8,7 @@ import "./HomePage.css";
 function HomePage() {
   return (
     <>
-      <MealsList />
+      <MealsList showAll={false} />
     </>
   );
 }

@@ -8,11 +8,14 @@
   background-color: #f9f9f9;
   text-align: center;
 }
+
 .meals-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 equal-width columns */
-  gap: 20px; /* Space between grid items */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  justify-items: center;
 }
+
 .meal-card {
   display: flex;
   flex-direction: column;
@@ -21,8 +24,12 @@
   border-radius: 8px;
   background-color: #fff;
   width: 250px;
-  margin: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.meal-card:hover {
+  transform: translateY(-5px);
 }
 
 .meal-image {
@@ -37,17 +44,120 @@
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
+  margin-bottom: 8px;
 }
 
 .meal-description {
   font-size: 1rem;
   color: #666;
-  margin-top: 10px;
+  margin: 10px 0;
+  line-height: 1.4;
 }
 
 .meal-price {
   font-size: 1.2rem;
   color: #2a9d8f;
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: auto;
+}
+
+.load-more-btn {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.8rem 2rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 200px;
+}
+
+.load-more-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.load-more-btn:active {
+  transform: translateY(0);
+}
+
+.load-more-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.load-more-btn:disabled::after {
+  content: " ";
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.5rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1200px) {
+  .meals-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .meals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .meals-list {
+    margin: 10px;
+    padding: 10px 5px;
+  }
+
+  .meals-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .meal-card {
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  .load-more-btn {
+    width: 100%;
+    max-width: 200px;
+    padding: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .meal-title {
+    font-size: 1.3rem;
+  }
+
+  .meal-description {
+    font-size: 0.9rem;
+  }
+
+  .meal-price {
+    font-size: 1.1rem;
+  }
 }

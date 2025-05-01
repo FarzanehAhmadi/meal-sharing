@@ -1,5 +1,5 @@
 import "./globals.css";
-import Providers from "@/components/Provider/Provider"; // MUI + Navbar wrapper
+import Providers from "@/components/Provider/Provider";
 
 export const metadata = {
   title: "HackYourFuture",
