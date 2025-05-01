@@ -5,12 +5,12 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <AppBar position="static" sx={{ backgroundColor: "#ffe6cc" }}>
+    <AppBar position="static" sx={{ backgroundColor: "#001a33" }}>
       <Toolbar>
         <Typography
           variant="h6"
           component="div"
-          sx={{ flexGrow: 1, color: "#800000" }}
+          sx={{ flexGrow: 1, color: "#d9f2e6" }}
         >
           HackYourFuture
         </Typography>
@@ -18,7 +18,7 @@ const Navbar = () => {
           color="inherit"
           component={Link}
           href="/"
-          sx={{ color: "#800000" }}
+          sx={{ color: "#d9f2e6" }}
         >
           Home
         </Button>
@@ -26,7 +26,7 @@ const Navbar = () => {
           color="inherit"
           component={Link}
           href="/meals"
-          sx={{ color: "#800000" }}
+          sx={{ color: "#d9f2e6" }}
         >
           Meals
         </Button>

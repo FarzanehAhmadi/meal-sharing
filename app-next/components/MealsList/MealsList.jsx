@@ -25,7 +25,7 @@ const MealsList = ({ showAll = false }) => {
     fetchMeals();
   }, []);
 
-  const displayedMeals = showAll ? meals : meals.slice(0, 8); // Adjust visible meals for homepage
+  const displayedMeals = showAll ? meals : meals.slice(0, 8);
 
   return (
     <div className="meals-list">
