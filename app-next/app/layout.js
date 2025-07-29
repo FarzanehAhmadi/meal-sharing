@@ -2,7 +2,7 @@ import "./globals.css";
 import Providers from "@/components/Provider/Provider";
 
 export const metadata = {
-  title: "HackYourFuture",
+  title: "Meal Sharing",
 };
 
 export default function RootLayout({ children }) {
