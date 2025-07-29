@@ -36,5 +36,5 @@ Overall, this project was a great learning experience for me and helped me grow 
 
 ## Screenshots
 <img width="1919" height="1076" alt="image" src="https://github.com/user-attachments/assets/7b76e616-d8ab-46be-914f-983bb5fdbcd4" />
-<img width="571" height="756" alt="image" src="https://github.com/user-attachments/assets/8050b8aa-6293-4492-9fd8-f94511499d17" />
+<img width="572" height="771" alt="image" src="https://github.com/user-attachments/assets/1eb2ca6c-2dc2-4c22-8d87-6fe14e875568" />
 
