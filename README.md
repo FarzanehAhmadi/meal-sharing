@@ -1,6 +1,6 @@
 
 # Meal Sharing App
-➡️ <a href="https://meal-sharing-app.vercel.app/" target="_blank">**LINK TO THE APP**</a>
+
 
 ## Description
 
