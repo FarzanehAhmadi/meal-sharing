@@ -35,5 +35,4 @@ In addition to these technical skills, I also learned how to manage my time effe
 Overall, this project was a great learning experience for me and helped me grow as a developer.
 
 ## Screenshots
-
-
+<img width="1919" height="1076" alt="image" src="https://github.com/user-attachments/assets/7b76e616-d8ab-46be-914f-983bb5fdbcd4" />
