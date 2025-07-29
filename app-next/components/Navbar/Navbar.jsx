@@ -12,7 +12,9 @@ const Navbar = () => {
           component="div"
           sx={{ flexGrow: 1, color: "#d9f2e6" }}
         >
-          HackYourFuture
+          <a href="/" style={{ color: "inherit", textDecoration: "none" }}>
+            HackYourFuture
+          </a>
         </Typography>
         <Button
           color="inherit"
